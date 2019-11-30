@@ -18,10 +18,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.HashSet;
 
 
@@ -39,7 +43,7 @@ public class Game extends Application {
         try {
             board = new Board();
         } catch (FileNotFoundException e) {
-
+            e.getStackTrace();
         }
 
         onMove = false;
@@ -49,11 +53,11 @@ public class Game extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        AudioClip chessMove = new AudioClip(Paths.get("local/sound/chessSound.mp3").toUri().toString());
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
 
-        gridPane.setVgap(1);
+        gridPane.setVgap(2);
         gridPane.setHgap(1);
 
         gridPane.getColumnConstraints().add(new ColumnConstraints(8));
@@ -81,18 +85,35 @@ public class Game extends Application {
                         }
                         onMove = true;
                     } else {
+
+
+                        for(Tile t : board.tiles) {
+                            t.deactivate();
+                        }
+
                         Tile thisTile = (Tile) mouseEvent.getSource();
                         if(holder.legalMove(thisTile, turn, board.tiles)) {
+                            chessMove.play();
                             Piece piece = holder.getPiece();
                             holder.removePiece();
                             thisTile.setPiece(piece);
                             holder.setGraphic(null);
                             thisTile.setGraphic(thisTile.getImage());
-                            turn = !turn;
-                        }
 
-                        for(Tile t : board.tiles) {
-                            t.deactivate();
+                            turn = !turn;
+
+                            if(board.lose(turn)) {
+
+                                for(Tile tile : board.tiles) {
+                                    tile.setDisable(true);
+                                }
+
+                            } else {
+                                if (board.check(turn) != null) {
+                                    board.check(turn).checker();
+                                }
+                            }
+
                         }
                         onMove = false;
                     }

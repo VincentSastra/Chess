@@ -1,5 +1,6 @@
 package Chess.Board;
 
+import Chess.Piece.King;
 import Chess.Piece.Pawn;
 import Chess.Piece.Piece;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -51,28 +53,36 @@ public class Tile extends Button {
             return false;
         }
 
-        return piece.legalMove(this, tile, tileSet);
+        if(piece.legalMove(this, tile, tileSet)) {
+            return true;
+        }
+
+        return false;
     }
 
     public void activate() {
         this.setStyle(
                 "-fx-background-radius: 0;" +
-                        "-fx-focus-color: #AAAAAA;" +
-                        "-fx-background-color: #B10DC9;");
+                        "-fx-background-color: #EE7600;");
     }
 
     public void deactivate() {
         if ((x + y) % 2 == 0) {
             this.setStyle(
                     "-fx-background-radius: 0;" +
-                            "-fx-background-color: #001f3f;" +
-                            "-fx-focus-color: #7FDBFF;");
+                            "-fx-background-color: #ebc8b2;");
         } else {
             this.setStyle(
                     "-fx-background-radius: 0;" +
-                            "-fx-focus-color: #AAAAAA;" +
-                            "-fx-background-color: #DDDDDD;");
+                            "-fx-background-color: #8C92AC ;");
         }
+    }
+
+    public void checker() {
+        System.out.println("turning red");
+        this.setStyle(
+                "-fx-background-radius: 0;" +
+                        "-fx-background-color: #DC143C ;");
     }
 
     public void setPiece(Piece piece) {

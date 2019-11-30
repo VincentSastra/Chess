@@ -12,4 +12,6 @@ public interface Piece {
     public boolean legalMove(Tile origin, Tile dest, ArrayList<Tile> tilesSet);
 
     public boolean getWhite();
+
+    public boolean isKing();
 }

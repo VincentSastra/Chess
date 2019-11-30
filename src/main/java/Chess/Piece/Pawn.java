@@ -14,8 +14,14 @@ public class Pawn implements Piece {
     private boolean white;
 
     public Pawn(boolean white) throws FileNotFoundException {
-        FileInputStream input = new FileInputStream("local/images/pawn.png");
-        Image image = new Image(input, 30, 30, false, false);
+        FileInputStream input;
+        if(white) {
+            input = new FileInputStream("local/images/pawnWhite1.png");
+        } else {
+            input = new FileInputStream("local/images/pawnBlack.png");
+        }
+
+        Image image = new Image(input, 30, 30, true, true);
         this.imageView = new ImageView(image);
         this.imageView.setStyle("-fx-background-color:transparent;");
         this.white = white;
@@ -28,6 +34,9 @@ public class Pawn implements Piece {
 
     @Override
     public boolean legalMove(Tile origin, Tile dest, ArrayList<Tile> tilesSet) {
+        if(dest.isEnemy(!white) || origin.x == dest.x && origin.y == dest.y) {
+            return false;
+        }
 
         if(white) {
             if (dest.isEmpty() && origin.x == dest.x && origin.y + 1 == dest.y) {
@@ -69,4 +78,9 @@ public class Pawn implements Piece {
         return white;
     }
 
+
+    @Override
+    public boolean isKing() {
+        return false;
+    }
 }

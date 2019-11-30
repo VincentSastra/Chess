@@ -14,8 +14,13 @@ public class Rook implements Piece {
     private boolean white;
 
     public Rook(boolean white) throws FileNotFoundException {
-        FileInputStream input = new FileInputStream("local/images/rook.png");
-        Image image = new Image(input, 30, 30, false, false);
+        FileInputStream input;
+        if(white) {
+            input = new FileInputStream("local/images/rookWhite1.png");
+        } else {
+            input = new FileInputStream("local/images/rookBlack.png");
+        }
+        Image image = new Image(input, 40, 40, true, true);
         this.imageView = new ImageView(image);
         this.imageView.setStyle("-fx-background-color:transparent;");
         this.white = white;
@@ -78,5 +83,10 @@ public class Rook implements Piece {
     @Override
     public boolean getWhite() {
         return white;
+    }
+
+    @Override
+    public boolean isKing() {
+        return false;
     }
 }
