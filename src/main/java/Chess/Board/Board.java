@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Board {
 
     public ArrayList<Tile> tiles = new ArrayList<>();
+    public ArrayList<Piece> whiteGrave = new ArrayList<>();
+    public ArrayList<Piece> blackGrave = new ArrayList<>();
 
     public Board(ArrayList<Tile> tiles) {
         this.tiles = new ArrayList<>(tiles);
@@ -93,6 +95,32 @@ public class Board {
         }
 
         return true;
+
+    }
+
+    public void movePiece(Tile origin, Tile dest) {
+
+        if(!dest.isEmpty()) {
+            System.out.println(dest.getPiece().getVal());
+
+            if(dest.getPiece().getWhite()) {
+                whiteGrave.add(dest.getPiece());
+                whiteGrave.sort(
+                        (Piece p1, Piece p2) -> Integer.compare(p1.getVal(), p2.getVal())
+                );
+            } else {
+                blackGrave.add(dest.getPiece());
+                blackGrave.sort(
+                    (Piece p1, Piece p2) -> Integer.compare(p1.getVal(), p2.getVal())
+                );
+            }
+        }
+
+        Piece piece = origin.getPiece();
+        origin.removePiece();
+        dest.setPiece(piece);
+        origin.setGraphic(null);
+        dest.setGraphic(dest.getImage());
 
     }
 

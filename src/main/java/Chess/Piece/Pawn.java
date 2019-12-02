@@ -13,6 +13,8 @@ public class Pawn implements Piece {
     private ImageView imageView;
     private boolean white;
 
+    public final static int NO = 1;
+
     public Pawn(boolean white) throws FileNotFoundException {
         FileInputStream input;
         if(white) {
@@ -78,9 +80,9 @@ public class Pawn implements Piece {
         return white;
     }
 
-
     @Override
-    public boolean isKing() {
-        return false;
+    public int getVal() {
+        return NO;
     }
+
 }

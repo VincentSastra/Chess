@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Knight implements Piece {
 
     private ImageView imageView;
+    public final static int NO = 3;
     private boolean white;
 
     public Knight(boolean white) throws FileNotFoundException {
@@ -53,9 +54,8 @@ public class Knight implements Piece {
         return white;
     }
 
-
     @Override
-    public boolean isKing() {
-        return false;
+    public int getVal() {
+        return NO;
     }
 }

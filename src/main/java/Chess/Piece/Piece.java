@@ -13,5 +13,6 @@ public interface Piece {
 
     public boolean getWhite();
 
-    public boolean isKing();
+    public int getVal();
+
 }

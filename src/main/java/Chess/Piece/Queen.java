@@ -12,6 +12,7 @@ public class Queen implements Piece {
 
     private ImageView imageView;
     private boolean white;
+    public final static int NO = 9;
 
     public Queen(boolean white) throws FileNotFoundException {
         FileInputStream input;
@@ -128,8 +129,8 @@ public class Queen implements Piece {
     }
 
     @Override
-    public boolean isKing() {
-        return false;
+    public int getVal() {
+        return NO;
     }
 
 }

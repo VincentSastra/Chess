@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Bishop implements Piece{
 
     private ImageView imageView;
+    public final static int NO = 4;
     private boolean white;
 
     public Bishop(boolean white) throws FileNotFoundException {
@@ -93,7 +94,8 @@ public class Bishop implements Piece{
     }
 
     @Override
-    public boolean isKing() {
-        return false;
+    public int getVal() {
+        return NO;
     }
+
 }

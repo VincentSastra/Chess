@@ -12,6 +12,7 @@ public class Rook implements Piece {
 
     private ImageView imageView;
     private boolean white;
+    public final static int NO = 5;
 
     public Rook(boolean white) throws FileNotFoundException {
         FileInputStream input;
@@ -86,7 +87,8 @@ public class Rook implements Piece {
     }
 
     @Override
-    public boolean isKing() {
-        return false;
+    public int getVal() {
+        return NO;
     }
+
 }

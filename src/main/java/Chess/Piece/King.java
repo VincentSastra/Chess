@@ -13,6 +13,8 @@ public class King implements Piece {
     private ImageView imageView;
     private boolean white;
 
+    public final static int NO = 90;
+
     public King(boolean white) throws FileNotFoundException {
 
         FileInputStream input;
@@ -51,7 +53,8 @@ public class King implements Piece {
     }
 
     @Override
-    public boolean isKing() {
-        return true;
+    public int getVal() {
+        return NO;
     }
+
 }
