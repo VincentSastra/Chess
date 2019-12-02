@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.AmbientLight;
 import javafx.scene.Group;
@@ -25,6 +26,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -145,14 +147,19 @@ public class Game extends Application {
 
                             if(board.lose(turn)) {
 
+                                Text text;
                                 for(Tile tile : board.tiles) {
                                     tile.setDisable(true);
                                 }
                                 if(turn) {
-                                    System.out.println("black wins");
+                                    text = new Text("Black Wins");
                                 } else {
-                                    System.out.println("white wins");
+                                    text = new Text("White Wins");
                                 }
+                                text.setStyle("-fx-font: 24 arial;");
+
+                                borderPane.setTop(text);
+                                borderPane.setAlignment(text, Pos.CENTER);
 
                             } else {
                                 if (board.check(turn) != null) {
